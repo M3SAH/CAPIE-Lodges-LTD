@@ -31,12 +31,18 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="rooms.html" class="active">Rooms</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </div>
     </nav>
+    <section class="promo-banner" aria-label="Seasonal special offer">
+        <div class="container promo-banner-content">
+            <span class="material-symbols-outlined" aria-hidden="true">celebration</span>
+            Easter Special Offers Available - Ask us on WhatsApp for this week's deals
+        </div>
+    </section>
 
     <header class="page-header">
         <div class="container">
@@ -48,12 +54,10 @@
     <section class="rooms section-padding pattern-bg">
         <div class="container">
             <div class="rooms-grid">
+                
                 <div class="room-card solid-card reveal">
                     <div class="room-img">
-                        <div class="no-image-box" aria-label="No room image available">
-                            <span class="material-symbols-outlined" aria-hidden="true">king_bed</span>
-                            <span>No image</span>
-                        </div>
+                        <img src="images/Budget-Room.jpeg" alt="Budget Room at CAPIE Lodges LTD">
                     </div>
                     <div class="room-info">
                         <h3>Budget Room</h3>
@@ -64,11 +68,9 @@
                         </p>
                         <button
                             class="btn-view-details"
-                            disabled
-                            aria-disabled="true"
-                            title="Photo will be added soon"
                             data-title="Budget Room"
                             data-price="ZMW 400 / Night"
+                            data-img="images/Budget-Room.jpeg"
                             data-desc="A neat, comfortable room designed for great value in Kafue. Ideal for solo travelers and short stays, with the essentials you need for a restful night."
                             data-features="Double bed, Air conditioning, Flat-screen TV, Free WiFi, Private bathroom with hot water, Wardrobe">
                             View Details
@@ -78,10 +80,7 @@
 
                 <div class="room-card solid-card reveal">
                     <div class="room-img">
-                        <div class="no-image-box" aria-label="No room image available yet">
-                            <span class="material-symbols-outlined" aria-hidden="true">king_bed</span>
-                            <span>No image</span>
-                        </div>
+                        <img src="images/Standard-Room.jpeg" alt="Standard Room at CAPIE Lodges LTD">
                     </div>
                     <div class="room-info">
                         <h3>Standard Room</h3>
@@ -95,8 +94,7 @@
                             data-title="Standard Room"
                             data-price="ZMW 500 / Night"
                             data-desc="A little more space for a smoother stay. Enjoy a comfortable setup and modern finishes—ideal for both work and relaxation."
-                            data-img=""
-                            data-img-label="No image (photo coming soon)"
+                            data-img="images/Standard-Room.jpeg"
                             data-features="Queen-size bed, Air conditioning, Flat-screen TV, Free WiFi, Private bathroom with hot water, Wardrobe, Seating area">
                             View Details
                         </button>
@@ -115,7 +113,7 @@
                         </p>
                         <button
                             class="btn-view-details"
-                            data-img="images/Deluxe-Room2.jpeg"
+                            data-img="images/Deluxe-Room.jpeg"
                             data-title="Deluxe Room"
                             data-price="ZMW 650 / Night"
                             data-desc="A stylish and comfortable room offering extra space and upgraded amenities - perfect for guests seeking a more refined stay."
@@ -137,7 +135,7 @@
                             A spacious, well-furnished room designed for maximum comfort -ideal for premium relaxation and a truly restful stay.
                         </p>
                         <button class="btn-view-details"
-                            data-img="images/Executive-Room2.jpeg"
+                            data-img="images/Executive-Room.jpeg"
                             data-title="Executive Room"
                             data-price="ZMW 700 / Night"
                             data-desc="A spacious, well-furnished room designed for maximum comfort—ideal for premium relaxation and a truly restful stay."
@@ -149,10 +147,7 @@
 
                 <div class="room-card solid-card reveal">
                     <div class="room-img">
-                        <div class="no-image-box" aria-label="Conference room image coming soon">
-                            <span class="material-symbols-outlined" aria-hidden="true">groups</span>
-                            <span>No image</span>
-                        </div>
+                        <img src="images/Conference-Room.jpeg" alt="Conference Room at CAPIE Lodges LTD">
                     </div>
                     <div class="room-info">
                         <h3>Conference Room</h3>
@@ -168,13 +163,13 @@
                             data-title="Conference Room"
                             data-price="Available for booking"
                             data-desc="A flexible, air-conditioned conference space ideal for meetings, workshops, and small events at CAPIE Lodges. Perfect for teams that want a quiet, focused environment in Kafue."
-                            data-img=""
-                            data-img-label="No image (conference room photo coming soon)"
+                            data-img="images/Conference-Room.jpeg"
                             data-features="Projector or TV (on request), Air conditioning, Comfortable seating, Tables for meetings, Free WiFi, Power outlets, Access to refreshments on request">
                             View Details
                         </button>
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -184,10 +179,7 @@
             <span class="close-modal material-symbols-outlined">close</span>
             <div class="modal-body">
                 <img id="modal-img" src="" alt="Room Image" class="modal-img" hidden>
-                <div id="modal-img-fallback" class="modal-img-fallback" hidden>
-                    <span class="material-symbols-outlined" aria-hidden="true">king_bed</span>
-                    <p id="modal-img-fallback-text">No image available</p>
-                </div>
+                
                 <div class="modal-info">
                     <h2 id="modal-title">Room Title</h2>
                     <p class="modal-price" id="modal-price">Price</p>

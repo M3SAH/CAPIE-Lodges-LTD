@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // Trigger on load
 
-    // 3) WhatsApp number (used by booking form on contact page)
+    // CONTACT SETTING: update this WhatsApp number when business number changes
     const waNumber = '260979476307';
 
     // 4) Room Details Modal Logic (rooms page)
@@ -157,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const checkout = document.getElementById('checkout').value;
             const roomType = document.getElementById('room-type').value;
 
+            // BOOKING MESSAGE TEMPLATE: edit this text if you want a different WhatsApp message format
             const fullMessage = `Hello, I would like to book a room at CAPIE Lodges.\nName: ${name}\nCheck-in: ${checkin}\nCheck-out: ${checkout}\nRoom Type: ${roomType}`;
             window.open(
                 `https://wa.me/${waNumber}?text=${encodeURIComponent(fullMessage)}`,

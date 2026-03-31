@@ -153,10 +153,34 @@ a { text-decoration: none; }
 .nav-links li { width: 100%; border-bottom: 1px solid rgba(26,42,26,0.06); }
 .nav-links li:first-child { border-top: 1px solid rgba(26,42,26,0.06); }
 .nav-links a { display: block; padding: 18px 0; color: var(--primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; transition: var(--transition); }
-.nav-links a:hover { color: var(--green); padding-left: 10px; }
+.nav-links a:hover, .nav-links a.active { color: var(--green); padding-left: 10px; }
 
 .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(26,42,26,0.25); z-index: 1000; backdrop-filter: blur(2px); }
 .nav-overlay.active { display: block; }
+
+/* SEASONAL PROMO BANNER (EASTER) - remove this block later if not needed */
+.promo-banner {
+    margin-top: 84px;
+    background: linear-gradient(90deg, rgba(247,215,116,0.18), rgba(198,156,255,0.18), rgba(167,226,255,0.18));
+    border-top: 1px solid rgba(26,42,26,0.08);
+    border-bottom: 1px solid rgba(26,42,26,0.08);
+}
+.promo-banner-content {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.5px;
+}
+.promo-banner .material-symbols-outlined {
+    color: var(--red-bright);
+    font-size: 1rem;
+}
 
 /* HERO */
 .hero { 
@@ -292,8 +316,13 @@ footer { padding: 50px 0; background: var(--primary); text-align: center; }
     .nav-links { position: static; right: auto; height: auto; width: auto; flex-direction: row; background: transparent; padding: 0; box-shadow: none; border: none; }
     .nav-links li { border: none; }
     .nav-links li + li { margin-left: 34px; }
-    .nav-links a { padding: 0; font-size: 0.78rem; color: rgba(255,255,255,0.88); letter-spacing: 2px; }
+    .nav-links a { padding: 0; font-size: 0.78rem; color: rgba(255,255,255,0.88); letter-spacing: 2px; position: relative; }
     .navbar.scrolled .nav-links a { color: var(--text); }
+    .nav-links a:hover, .nav-links a.active { padding-left: 0; color: var(--white); }
+    .navbar.scrolled .nav-links a:hover, .navbar.scrolled .nav-links a.active { color: var(--green); }
+    .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 0; height: 2px; background: var(--white); transition: var(--transition); }
+    .navbar.scrolled .nav-links a::after { background: var(--green); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
     .logo { font-size: 1.7rem; }
     .about-grid { grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
     .rooms-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -304,6 +333,7 @@ footer { padding: 50px 0; background: var(--primary); text-align: center; }
     .booking-form { margin-top: 0; }
     .contact-grid { grid-template-columns: 1fr 1.5fr; gap: 40px; }
     .navbar { background: transparent; }
+    .promo-banner { margin-top: 96px; }
 }
 
 .modal-img {
