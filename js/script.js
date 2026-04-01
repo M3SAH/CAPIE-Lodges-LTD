@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const pageLoader = document.getElementById('page-loader');
+    if (pageLoader) {
+        window.addEventListener('load', () => {
+            pageLoader.classList.add('hidden');
+        });
+    }
+
+    const scrollProgress = document.getElementById('scroll-progress');
+    if (scrollProgress) {
+        const updateScrollProgress = () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            scrollProgress.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+        };
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
+        updateScrollProgress();
+    }
+
     // 1) Navigation Logic
     const navbar = document.querySelector('.navbar');
     const menuToggle = document.getElementById('mobile-menu');
@@ -19,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navOverlay.classList.remove('active');
         navbar.classList.remove('menu-open');
         document.body.style.overflow = '';
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
     };
 
     if (navbar) {
@@ -28,8 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (menuToggle && navLinks && navOverlay) {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-controls', 'primary-navigation');
         menuToggle.addEventListener('click', () => {
             navLinks.classList.contains('active') ? closeMenu() : openMenu();
+            menuToggle.setAttribute(
+                'aria-expanded',
+                navLinks.classList.contains('active') ? 'true' : 'false'
+            );
         });
     }
 
@@ -58,6 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (roomModal) {
         roomModal.setAttribute('aria-hidden', 'true');
+        roomModal.setAttribute('role', 'dialog');
+        roomModal.setAttribute('aria-modal', 'true');
 
         const closeModal = document.querySelector('.close-modal');
         const viewDetailsBtns = document.querySelectorAll('.btn-view-details');
@@ -70,17 +98,44 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalImg = document.getElementById('modal-img');
         const modalImgFallback = document.getElementById('modal-img-fallback');
         const modalImgFallbackText = document.getElementById('modal-img-fallback-text');
+        let modalImageToken = 0;
+
+        const resetModalImageState = () => {
+            modalImageToken += 1;
+            if (modalImg) {
+                modalImg.hidden = true;
+                modalImg.style.display = 'none';
+                modalImg.src = '';
+                modalImg.alt = '';
+                modalImg.onload = null;
+                modalImg.onerror = null;
+            }
+            if (modalImgFallback) {
+                modalImgFallback.hidden = true;
+                modalImgFallback.style.display = 'none';
+            }
+        };
+
+        const showImageFallback = (label) => {
+            if (modalImg) {
+                modalImg.hidden = true;
+                modalImg.style.display = 'none';
+                modalImg.src = '';
+                modalImg.onload = null;
+                modalImg.onerror = null;
+            }
+            if (modalImgFallbackText) modalImgFallbackText.textContent = label || 'No image available';
+            if (modalImgFallback) {
+                modalImgFallback.hidden = false;
+                modalImgFallback.style.display = 'flex';
+            }
+        };
 
         closeRoomModal = () => {
             roomModal.style.display = 'none';
             roomModal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
-
-            if (modalImg) {
-                modalImg.hidden = true;
-                modalImg.src = '';
-            }
-            if (modalImgFallback) modalImgFallback.hidden = true;
+            resetModalImageState();
         };
 
         viewDetailsBtns.forEach((btn) => {
@@ -99,17 +154,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (modalPrice) modalPrice.textContent = price;
                 if (modalDesc) modalDesc.textContent = desc;
 
-                // Image / fallback
+                // Image / fallback (never render both, prevent flicker/race)
+                resetModalImageState();
                 if (modalImg && modalImgFallback) {
-                    if (img) {
-                        modalImg.src = img;
-                        modalImg.hidden = false;
-                        modalImgFallback.hidden = true;
+                    if (!img) {
+                        showImageFallback(imgLabel);
                     } else {
-                        modalImg.hidden = true;
-                        modalImg.src = '';
-                        if (modalImgFallbackText) modalImgFallbackText.textContent = imgLabel;
-                        modalImgFallback.hidden = false;
+                        const thisToken = modalImageToken;
+                        modalImg.alt = `${title} at CAPIE Lodges LTD`;
+                        modalImg.onload = () => {
+                            if (thisToken !== modalImageToken) return;
+                            modalImg.hidden = false;
+                            modalImg.style.display = 'block';
+                            modalImgFallback.hidden = true;
+                            modalImgFallback.style.display = 'none';
+                        };
+                        modalImg.onerror = () => {
+                            if (thisToken !== modalImageToken) return;
+                            showImageFallback(`${imgLabel} (coming soon)`);
+                        };
+                        modalImg.src = img;
                     }
                 }
 
@@ -143,6 +207,52 @@ document.addEventListener('DOMContentLoaded', () => {
         if (closeModal) closeModal.addEventListener('click', closeRoomModal);
         roomModal.addEventListener('click', (e) => {
             if (e.target === roomModal && closeRoomModal) closeRoomModal();
+        });
+    }
+
+    // 6) Gallery Lightbox
+    const galleryModal = document.getElementById('gallery-lightbox');
+    if (galleryModal) {
+        const galleryImage = document.getElementById('gallery-lightbox-image');
+        const galleryCaption = document.getElementById('gallery-lightbox-caption');
+        const galleryCloseBtn = galleryModal.querySelector('.gallery-lightbox-close');
+        const galleryTriggers = document.querySelectorAll('.gallery-tile');
+
+        const closeGalleryModal = () => {
+            galleryModal.style.display = 'none';
+            galleryModal.setAttribute('aria-hidden', 'true');
+            if (galleryImage) {
+                galleryImage.src = '';
+                galleryImage.alt = '';
+            }
+            if (galleryCaption) galleryCaption.textContent = '';
+            document.body.style.overflow = '';
+        };
+
+        galleryTriggers.forEach((trigger) => {
+            trigger.addEventListener('click', () => {
+                const img = trigger.querySelector('img');
+                if (!img || !galleryImage) return;
+
+                galleryImage.src = img.currentSrc || img.src;
+                galleryImage.alt = img.alt || 'Gallery image';
+                if (galleryCaption) galleryCaption.textContent = img.alt || 'CAPIE Lodges Gallery';
+                galleryModal.style.display = 'flex';
+                galleryModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        if (galleryCloseBtn) {
+            galleryCloseBtn.addEventListener('click', closeGalleryModal);
+        }
+
+        galleryModal.addEventListener('click', (event) => {
+            if (event.target === galleryModal) closeGalleryModal();
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeGalleryModal();
         });
     }
 

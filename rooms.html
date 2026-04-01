@@ -11,6 +11,16 @@
     <meta property="og:description" content="Explore rooms and rates at CAPIE Lodges LTD in Kafue. Book via WhatsApp.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="images/background.jpg">
+    <meta property="og:url" content="https://capielodges.com/rooms.html">
+    <meta name="twitter:title" content="Rooms & Rates | CAPIE Lodges LTD">
+    <meta name="twitter:description" content="Explore clean, modern rooms in Kafue and book instantly on WhatsApp.">
+    <meta name="twitter:image" content="images/background.jpg">
+    <link rel="canonical" href="https://capielodges.com/rooms.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,16 +29,18 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <div class="page-loader" id="page-loader" aria-hidden="true"><div class="page-loader-spinner"></div></div>
     <div class="nav-overlay" id="nav-overlay"></div>
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">CAPIE LODGES</a>
-            <div class="menu-toggle" id="mobile-menu">
+            <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu" type="button">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
-            <ul class="nav-links">
+            </button>
+            <ul class="nav-links" id="primary-navigation">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="rooms.html" class="active">Rooms</a></li>
@@ -176,7 +188,7 @@
 
     <div id="room-modal" class="modal">
         <div class="modal-content">
-            <span class="close-modal material-symbols-outlined">close</span>
+            <button class="close-modal material-symbols-outlined" type="button" aria-label="Close room details modal">close</button>
             <div class="modal-body">
                 <img id="modal-img" src="" alt="Room Image" class="modal-img" hidden>
                 <div id="modal-img-fallback" class="modal-img-fallback" hidden>
@@ -218,6 +230,18 @@
             </div>
         </div>
     </footer>
+    <a
+        class="whatsapp-float"
+        href="https://wa.me/260979476307"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with CAPIE Lodges on WhatsApp"
+    >
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M13.601 2.326A7.854 7.854 0 0 0 8.008 0C3.58 0 0 3.58 0 8.008a7.93 7.93 0 0 0 1.084 3.98L0 16l4.12-1.084a7.93 7.93 0 0 0 3.888 1.04h.003c4.428 0 8.008-3.58 8.008-8.008a7.854 7.854 0 0 0-2.417-5.622zM8.01 14.658a6.61 6.61 0 0 1-3.357-.92l-.24-.144-2.443.643.652-2.38-.156-.244a6.56 6.56 0 0 1-1.007-3.505c0-3.633 2.957-6.59 6.59-6.59a6.56 6.56 0 0 1 4.66 1.93 6.57 6.57 0 0 1 1.93 4.66c-.001 3.633-2.958 6.59-6.59 6.59z"/>
+            <path fill="currentColor" d="M11.524 9.356c-.2-.1-1.187-.586-1.37-.653-.183-.067-.316-.1-.449.1-.133.2-.516.653-.633.786-.116.133-.233.15-.433.05-.2-.1-.846-.312-1.611-.995-.595-.53-.997-1.187-1.113-1.387-.116-.2-.012-.308.088-.408.09-.09.2-.233.3-.35.1-.117.133-.2.2-.333.067-.133.033-.25-.017-.35-.05-.1-.45-1.087-.617-1.49-.163-.392-.328-.339-.449-.345l-.383-.007a.73.73 0 0 0-.533.25c-.183.2-.7.683-.7 1.667 0 .983.717 1.933.817 2.066.1.133 1.41 2.156 3.416 3.022.477.206.849.33 1.14.423.479.152.916.13 1.261.08.385-.057 1.187-.483 1.354-.95.167-.466.167-.866.117-.95-.05-.083-.183-.133-.383-.233z"/>
+        </svg>
+    </a>
     <script src="js/script.js"></script>
 </body>
 </html>
