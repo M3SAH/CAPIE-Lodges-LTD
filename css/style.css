@@ -375,6 +375,12 @@ input:focus, select:focus { border-color: var(--green); box-shadow: 0 0 0 3px va
 .contact-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
 .contact-details { padding: 36px 28px; }
 .contact-line { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 0.95rem; font-weight: 500; }
+.contact-line-group { align-items: flex-start; }
+.phone-list { display: flex; flex-direction: column; gap: 6px; }
+.phone-item { margin: 0; line-height: 1.5; }
+.phone-label { color: var(--text-muted); font-weight: 600; margin-right: 6px; }
+.phone-item a { color: var(--primary); font-weight: 600; }
+.phone-item a:hover { color: var(--green); }
 .social-links { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
 .social-links > span { padding: 8px 22px; border: 1.5px solid rgba(26,42,26,0.15); border-radius: 50px; font-size: 0.78rem; font-weight: 600; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; }
 .map-container { padding: 10px; height: 320px; overflow: hidden; border-radius: var(--radius); }

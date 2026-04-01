@@ -114,7 +114,23 @@
                 <div class="contact-details solid-card reveal">
                     <h2>Contact Capie Lodges</h2>
                     <p class="contact-line"><span class="material-symbols-outlined">location_on</span>Shimabala, Kafue</p>
-                    <p class="contact-line"><span class="material-symbols-outlined">call</span> 0979476307</p>
+                    <div class="contact-line contact-line-group">
+                        <span class="material-symbols-outlined" aria-hidden="true">call</span>
+                        <div class="phone-list">
+                            <p class="phone-item">
+                                <span class="phone-label">Bookings:</span>
+                                <a href="tel:+260979476307">0979476307</a>
+                            </p>
+                            <p class="phone-item">
+                                <span class="phone-label">Bookings:</span>
+                                <a href="tel:+260764700003">0764700003</a>
+                            </p>
+                            <p class="phone-item">
+                                <span class="phone-label">Calls:</span>
+                                <a href="tel:+260571048698">0571048698</a>
+                            </p>
+                        </div>
+                    </div>
                     <p class="contact-line"><span class="material-symbols-outlined">mail</span> <a href="mailto:capielodges@gmail.com">capielodges@gmail.com</a></p>
                     <div class="social-links">
                         <a
@@ -164,7 +180,11 @@
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "CAPIE Lodges LTD",
-            "telephone": "+260979476307",
+            "telephone": [
+                "+260979476307",
+                "+260571048698",
+                "+260764700003"
+            ],
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Kafue",
