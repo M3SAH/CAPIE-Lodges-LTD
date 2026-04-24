@@ -61,29 +61,6 @@ a { text-decoration: none; }
     background-size: 28px 28px;
 }
 
-/* EASTER THEME START (removable) */
-.pattern-bg {
-    position: relative;
-    overflow: hidden;
-}
-.pattern-bg::before {
-    content: "";
-    position: absolute;
-    inset: -40px;
-    background-image:
-        radial-gradient(circle at 10% 20%, rgba(247,215,116,0.25), transparent 55%),
-        radial-gradient(circle at 80% 10%, rgba(167,226,255,0.22), transparent 55%),
-        radial-gradient(circle at 20% 90%, rgba(198,156,255,0.22), transparent 55%),
-        radial-gradient(circle at 90% 80%, rgba(255,182,193,0.22), transparent 55%);
-    opacity: 0.32;
-    pointer-events: none;
-    z-index: 0;
-}
-.pattern-bg > * {
-    position: relative;
-    z-index: 1;
-}
-/* /EASTER THEME END */
 
 .subtitle {
     display: block; text-transform: uppercase; letter-spacing: 4px;
@@ -158,30 +135,6 @@ a { text-decoration: none; }
 
 .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(26,42,26,0.25); z-index: 1000; backdrop-filter: blur(2px); }
 .nav-overlay.active { display: block; }
-
-/* SEASONAL PROMO BANNER (EASTER) - remove this block later if not needed */
-.promo-banner {
-    margin-top: 84px;
-    background: linear-gradient(90deg, rgba(247,215,116,0.18), rgba(198,156,255,0.18), rgba(167,226,255,0.18));
-    border-top: 1px solid rgba(26,42,26,0.08);
-    border-bottom: 1px solid rgba(26,42,26,0.08);
-}
-.promo-banner-content {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    text-align: center;
-    color: var(--primary);
-    font-weight: 600;
-    font-size: 0.82rem;
-    letter-spacing: 0.5px;
-}
-.promo-banner .material-symbols-outlined {
-    color: var(--red-bright);
-    font-size: 1rem;
-}
 
 /* HERO */
 .hero { 
@@ -434,7 +387,6 @@ footer { padding: 50px 0; background: var(--primary); text-align: center; }
     .booking-form { margin-top: 0; }
     .contact-grid { grid-template-columns: 1fr 1.5fr; gap: 40px; }
     .navbar { background: transparent; }
-    .promo-banner { margin-top: 96px; }
 }
 
 .modal-img {
@@ -574,7 +526,7 @@ footer { padding: 50px 0; background: var(--primary); text-align: center; }
     border-radius: var(--radius);
 }
 
-/* EASTER THEME is applied site-wide via the removable body background block above. */
+
 .scroll-progress {
     position: fixed;
     top: 0;
