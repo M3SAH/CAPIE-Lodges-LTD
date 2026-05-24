@@ -36,7 +36,7 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 html, body { max-width: 100%; }
 
 body {
@@ -210,7 +210,7 @@ a { text-decoration: none; }
 .modal-info h4 { color: var(--text-muted); margin-bottom: 12px; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
 .modal-features-list { list-style: none; margin-bottom: 28px; display: grid; grid-template-columns: 1fr; gap: 10px; }
 .modal-features-list li { position: relative; padding-left: 22px; font-size: 0.88rem; color: var(--text); }
-.modal-features-list li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+.modal-features-list li::before { content: "\2713"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
 
 /* AMENITIES */
 .amenities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -336,8 +336,18 @@ input:focus, select:focus { border-color: var(--green); box-shadow: 0 0 0 3px va
 .phone-item a:hover { color: var(--green); }
 .social-links { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
 .social-links > span { padding: 8px 22px; border: 1.5px solid rgba(26,42,26,0.15); border-radius: 50px; font-size: 0.78rem; font-weight: 600; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; }
-.map-container { padding: 10px; height: 320px; overflow: hidden; border-radius: var(--radius); }
-
+.map-container { padding: 10px; height: 320px; overflow: hidden; border-radius: var(--radius); }    .map-container iframe,
+    .map-container embed,
+    .map-container object {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        height: 100%;
+    }
+    .map-container iframe {
+        aspect-ratio: 4 / 3;
+        min-height: 240px;
+    }
 /* FOOTER */
 footer { padding: 50px 0; background: var(--primary); text-align: center; }
 .footer-logo { color: var(--green-light); display: block; margin-bottom: 8px; font-size: 1.5rem; letter-spacing: 3px; }
@@ -608,5 +618,269 @@ footer { padding: 50px 0; background: var(--primary); text-align: center; }
     .rooms-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 36px;
+    }
+}
+
+/* Refinement pass without changing the CAPIE visual identity */
+.hero {
+    min-height: 720px;
+    height: auto;
+    padding: 120px 0 60px;
+}
+.hero-overlay {
+    background: linear-gradient(155deg, rgba(6,12,6,0.88) 0%, rgba(10,24,10,0.68) 48%, rgba(6,12,6,0.9) 100%);
+}
+.hero-content {
+    max-width: 980px;
+}
+.hero-kicker {
+    display: inline-block;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+.hero h1 {
+    font-size: clamp(2.55rem, 7vw, 5rem);
+    line-height: 0.98;
+    margin: 0 auto 20px;
+    max-width: 860px;
+}
+.hero p {
+    font-size: clamp(0.98rem, 2vw, 1.18rem);
+    margin: 0 auto 26px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.88);
+    max-width: 620px;
+}
+.hero-contact-panel {
+    width: min(100%, 960px);
+    margin: 28px auto 28px;
+    padding: 14px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: var(--radius);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+}
+.hero-contact-panel a,
+.hero-contact-panel span {
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    background: rgba(255,255,255,0.08);
+    font-size: 0.82rem;
+    line-height: 1.35;
+}
+.hero-contact-panel .material-symbols-outlined {
+    color: var(--gold);
+    font-size: 1.1rem;
+    flex: 0 0 auto;
+}
+.hero-contact-panel strong {
+    color: rgba(255,255,255,0.72);
+    font-size: 0.68rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+.room-page-intro p {
+    max-width: 700px;
+    margin: 10px auto 0;
+    color: var(--text-muted);
+}
+.refined-rooms-grid .room-card {
+    border-color: rgba(26,42,26,0.08);
+}
+.refined-rooms-grid .room-card:hover {
+    transform: translateY(-5px);
+}
+.room-heading-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+.room-heading-row h3,
+.room-heading-row .price {
+    margin-bottom: 0;
+}
+.occupancy {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--primary);
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+.occupancy .material-symbols-outlined {
+    color: var(--green);
+    font-size: 1.1rem;
+}
+.room-amenities {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+.room-amenities li {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 10px;
+    border: 1px solid rgba(30,132,73,0.13);
+    border-radius: 999px;
+    background: rgba(30,132,73,0.05);
+    color: var(--text);
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+.room-amenities .material-symbols-outlined {
+    font-size: 1rem;
+    color: var(--green);
+}
+.room-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 18px;
+}
+.btn-book-room {
+    width: 100%;
+    padding: 12px 20px;
+}
+.modal-features-list li::before {
+    content: "\2713";
+}
+.split-intro {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    align-items: end;
+    margin-bottom: 30px;
+}
+.split-intro h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+    max-width: 720px;
+}
+.split-intro p {
+    color: var(--text-muted);
+    max-width: 470px;
+}
+.home-room-strip {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+.home-room-strip img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid rgba(26,42,26,0.08);
+    box-shadow: var(--shadow-sm);
+}
+.home-room-strip img:nth-child(2) {
+    height: 310px;
+}
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+.testimonial-card {
+    padding: 28px;
+}
+.testimonial-card p {
+    color: var(--text);
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+}
+.testimonial-card strong {
+    color: var(--green);
+    font-size: 0.78rem;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+.page-loader {
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.page-loader-spinner {
+    width: 34px;
+    height: 34px;
+    animation-duration: 1s;
+}
+
+@media (min-width: 768px) {
+    .hero-contact-panel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .room-actions {
+        grid-template-columns: 0.85fr 1.15fr;
+    }
+    .split-intro {
+        grid-template-columns: 1.3fr 0.7fr;
+    }
+    .home-room-strip {
+        grid-template-columns: 0.9fr 1.2fr 0.9fr;
+        align-items: center;
+    }
+    .home-room-strip img:first-child,
+    .home-room-strip img:last-child {
+        height: 250px;
+    }
+    .home-room-strip img:nth-child(2) {
+        height: 340px;
+    }
+    .testimonial-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-contact-panel {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .room-card-wide {
+        grid-column: span 2;
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+    }
+    .room-card-wide .room-img img {
+        height: 100%;
+        min-height: 360px;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero {
+        min-height: 760px;
+        padding-top: 110px;
+    }
+    .hero h1 {
+        line-height: 1.04;
+    }
+    .hero-contact-panel a,
+    .hero-contact-panel span {
+        justify-content: flex-start;
+    }
+    .amenities-grid.trust-grid {
+        grid-template-columns: 1fr;
+    }
+    .room-heading-row {
+        display: block;
     }
 }

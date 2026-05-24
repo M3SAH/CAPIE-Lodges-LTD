@@ -77,6 +77,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // CONTACT SETTING: update this WhatsApp number when business number changes
     const waNumber = '260979476307';
+    const buildBookingUrl = (roomName, guestCount = '') => {
+        const guestText = guestCount ? ` for ${guestCount}` : '';
+        const message = `Hello CAPIE LODGES, I would like to book the ${roomName}${guestText}. Please confirm availability.`;
+        return `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+    };
+
+    const bookingButtons = document.querySelectorAll('.btn-book-room');
+    bookingButtons.forEach((button) => {
+        const roomName = button.getAttribute('data-room-name') || 'room';
+        const guestCount = button.getAttribute('data-guests') || '';
+        button.setAttribute('href', buildBookingUrl(roomName, guestCount));
+        button.setAttribute('target', '_blank');
+        button.setAttribute('rel', 'noopener noreferrer');
+    });
 
     // 4) Room Details Modal Logic (rooms page)
     const roomModal = document.getElementById('room-modal');
@@ -94,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalPrice = document.getElementById('modal-price');
         const modalDesc = document.getElementById('modal-desc');
         const modalFeatures = document.getElementById('modal-features');
+        const modalBookBtn = roomModal.querySelector('.modal-book-btn');
 
         const modalImg = document.getElementById('modal-img');
         const modalImgFallback = document.getElementById('modal-img-fallback');
@@ -146,6 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const price = btn.getAttribute('data-price') || '';
                 const desc = btn.getAttribute('data-desc') || '';
                 const featuresStr = btn.getAttribute('data-features') || '';
+                const cardBookBtn = btn.closest('.room-card')?.querySelector('.btn-book-room');
+                const guests = cardBookBtn?.getAttribute('data-guests') || '';
 
                 const img = (btn.getAttribute('data-img') || '').trim();
                 const imgLabel = btn.getAttribute('data-img-label') || 'No image available';
@@ -153,6 +170,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (modalTitle) modalTitle.textContent = title;
                 if (modalPrice) modalPrice.textContent = price;
                 if (modalDesc) modalDesc.textContent = desc;
+                if (modalBookBtn) {
+                    modalBookBtn.setAttribute('data-room-name', title);
+                    modalBookBtn.setAttribute('data-guests', guests);
+                    modalBookBtn.href = buildBookingUrl(title, guests);
+                    modalBookBtn.target = '_blank';
+                    modalBookBtn.rel = 'noopener noreferrer';
+                }
 
                 // Image / fallback (never render both, prevent flicker/race)
                 resetModalImageState();
